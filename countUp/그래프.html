@@ -27,11 +27,11 @@
             right: calc(100% + 5px);
         }
         .dot {
+            position: absolute;
             width: 4px;
             height: 4px;
             border-radius: 50%;
             background-color: red;
-            position: absolute;
             transform: translate(-50%,50%);
             bottom: 0px;
             left: 0px;
@@ -42,14 +42,32 @@
     <div class="graph">
         <p class="time">t</p>
         <p class="value">v</p>
-        
-        <div class="dot"></div>
-        <div class="dot"></div>
+        <div class="dots">
+        </div>
     </div>
 
     <script>
         // 마음에 드는 그래프 구현하기
         // dot을 이용해 그래프를 그려봅시다.
+
+        const graph = document.querySelector(`.graph`);
+        const time = document.querySelector(`.time`);
+        const value = document.querySelector(`.value`);
+        const dots = document.querySelector(`.dots`);
+
+        
+        for(let i = 0 ; i < 10 ; i ++) {
+            const dot = document.createElement(`div`);
+            dot.classList.add(`dot`);
+
+            dots.appendChild(dot);
+        }
+
+        for(let i = 0 ; i < dots.childElementCount ; i ++) {
+            dots.children[i].style.bottom = `${i * (graph.clientHeight / 10)}px`
+            dots.children[i].style.left = `${i * (graph.clientWidth / 10)}px`
+        }
+
     </script>
 </body>
 </html>
