@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p class="count"></p>
+
+    <script>
+
+        // 카운트업이 되긴 하나,
+        // 시간을 지정하기가 어렵고
+        // 성능상 매우 비효율적인 형태
+        
+        const count = document.querySelector(`.count`);
+        const time = 2;
+        const goal = 1000000;
+        const frame = 50;
+        const totalframe = time * frame;
+
+        // 위의 상수들을 이용해 아래 반복문 수정해보면?
+        // 1초당 재생되는 횟수는 60번으로 제한합니다.
+
+        // *힌트 : i <= 1000000 대신 i <= time * 60을 넣어볼 수 있을것.
+
+        for(let i = 0 ; i <= totalframe ; i ++) {
+            const 진행도 = i / totalframe;
+            setTimeout(() => {
+                count.innerText = parseInt(goal * easeInOutCubic(진행도)); ;
+            }, i / frame * 1000);
+        }
+
+        // 'easings.net' 에서 함수를 가져올 수 있다.
+        // https://easings.net/ko
+        function easeInOutCubic(x) {
+            return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+        }
+
+
+    </script>
+</body>
+</html>
