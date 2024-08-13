@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .graph {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            border: solid black;
+            border-width: 0 0 1px 1px;
+            margin: 100px;
+        }
+        .time {
+            position: absolute;
+            right: 0px;
+            top: 100%;
+        }
+        .value {
+            position: absolute;
+            right: calc(100% + 5px);
+        }
+        .dot {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background-color: red;
+            transform: translate(-50%,50%);
+            bottom: 0px;
+            left: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="graph">
+        <p class="time">t</p>
+        <p class="value">v</p>
+        <div class="dots">
+        </div>
+    </div>
+
+    <script>
+        // 마음에 드는 그래프 구현하기
+        // dot을 이용해 그래프를 그려봅시다.
+
+        const dots = document.querySelector(`.dots`);
+        const dotCount = 300;
+        
+        
+        for(let i = 0 ; i <= dotCount ; i ++) {
+            const 진행도 = 1 / dotCount * i;
+
+            const dot = document.createElement(`div`);
+            dot.classList.add(`dot`);
+
+            dot.style.backgroundColor = `pink`;
+            dot.style.left = `${진행도 * 100}%`
+            dot.style.bottom = `${easeInOutQuint(진행도) * 100}%`
+
+            dots.appendChild(dot);
+        }
+
+        for(let i = 0 ; i <= dotCount ; i ++) {
+            const 진행도 = 1 / dotCount * i;
+
+            const dot = document.createElement(`div`);
+            dot.classList.add(`dot`);
+
+            dot.style.backgroundColor = `skyBlue`;
+            dot.style.left = `${진행도 * 100}%`
+            dot.style.bottom = `${easeInOutBounce(진행도) * 100}%`
+
+            dots.appendChild(dot);
+        }
+
+        // 버튼을 만들고 append 하기 전 이벤트리스너 같은것들을 완성시키고 append 해주는게 맞다.
+
+        function easeInOutQuint(x) {
+            return x < 0.5 ? 16 * x * x * x * x * x : 1 - Math.pow(-2 * x + 2, 5) / 2;
+        }
+
+        function easeInOutBounce(x) {
+            return x < 0.5
+            ? (1 - easeOutBounce(1 - 2 * x)) / 2
+            : (1 + easeOutBounce(2 * x - 1)) / 2;
+        }
+
+        function easeOutBounce(x) {
+            const n1 = 7.5625;
+            const d1 = 2.75;
+
+            if (x < 1 / d1) {
+                return n1 * x * x;
+            } else if (x < 2 / d1) {
+                return n1 * (x -= 1.5 / d1) * x + 0.75;
+            } else if (x < 2.5 / d1) {
+                return n1 * (x -= 2.25 / d1) * x + 0.9375;
+            } else {
+                return n1 * (x -= 2.625 / d1) * x + 0.984375;
+            }
+        }
+    </script>
+</body>
+</html>
