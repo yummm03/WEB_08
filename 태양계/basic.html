@@ -28,18 +28,41 @@
             top: 50%;
         }
 
+        .mercury {
+            width: 30px;
+            height: 30px;
+            background-color: lightgray;
+            left: 50%;
+            top: 0%;
+        }
+
         .vinus {
+            width: 40px;
+            height: 40px;
+            background-color: orange;
+            /* animation: vinusRevolution 1s infinite linear; */
+            /* transform-origin: 0px calc(200px + 10px); */
+            left: 50%;
+            top: 0%;
+            /* animation: revolution 2s infinite linear; */
+        }
+
+        .earth {
+            width: 60px;
+            height: 60px;
+            background-color: blue;
+            left: 50%;
+            top: 0%;
+        }
+
+        .moon {
             width: 20px;
             height: 20px;
             background-color: yellow;
-            animation: vinusRevolution 1s infinite linear;
-            transform-origin: 0px calc(200px + 10px);
             left: 50%;
             top: 0%;
-
-            /* animation: revolution 2s infinite linear; */
-
         }
+
 
         /* @keyframes vinusRevolution {
             0%{
@@ -59,9 +82,9 @@
             }
         }
 
-        .공전궤도 {
-            width: 400px;
-            height: 400px;
+        .수성궤도 {
+            width: 450px;
+            height: 450px;
             position: absolute;
             left: 50%;
             top: 50%;
@@ -71,16 +94,63 @@
             box-sizing: border-box;
             animation: revolution infinite 3s linear;
         }
+
+        .금성궤도 {
+            width: 600px;
+            height: 600px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            border: 1px solid white;
+            border-radius: 50%;
+            box-sizing: border-box;
+            animation: revolution infinite 5s linear;
+        }
+
+        .지구궤도 {
+            width: 800px;
+            height: 800px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            border: 1px solid white;
+            border-radius: 50%;
+            box-sizing: border-box;
+            animation: revolution infinite 10s linear;
+        }
+
+        .달궤도 {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            border: 1px solid white;
+            border-radius: 50%;
+            box-sizing: border-box;
+            animation: revolution infinite 5s linear;
+        }
     </style>
 </head>
 <body>
     <div class="sun orb">
-
-    </div>
-    <div class="공전궤도">
-        <div class="vinus orb">
-            
+        <div class="수성궤도">
+            <div class="mercury orb"></div>
+        </div>
+        <div class="금성궤도">
+            <div class="vinus orb"></div>
+        </div>
+        <div class="지구궤도">
+            <div class="earth orb">
+                <div class="달궤도">
+                    <div class="moon orb"></div>
+                </div>
+            </div>
         </div>
     </div>
+    
 </body>
 </html>
