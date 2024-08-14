@@ -5,152 +5,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        :root {
+            --play-rate : 100;
+        }
+
         * {
             margin: 0;
             padding: 0;
         }
 
         body{
-            background-color: #333;
+            background-color: #222;
+            overflow: hidden;
+        }
+
+        .solar {
+            width: 0;
+            height: 0;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 50%;
         }
 
         .orb {
+            aspect-ratio: 1;
             position: absolute;
             border-radius: 50%;
+            top: 0;
+            left: 50%;
             transform: translate(-50%,-50%);
         }
 
-        .sun{
-            width: 200px;
-            height: 200px;
-            background-color: red;
+        .revolution {
+            position: absolute;
+            border-radius: 50%;
+            animation: revolution infinite linear;
+            aspect-ratio: 1;
+            border: 1px solid gray;
+            top: 0;
             left: 50%;
-            top: 50%;
+            transform-origin: 0% 0%;
+        }
+        
+        .solar > .orb {
+            width: 50px;
+            background-color: red;
         }
 
         .mercury {
-            width: 30px;
-            height: 30px;
+            width: 200px;
+        }
+
+        .mercury > .orb {
+            width: 7px;
             background-color: lightgray;
-            left: 50%;
-            top: 0%;
         }
 
         .vinus {
-            width: 40px;
-            height: 40px;
+            width: 300px;
+        }
+
+        .vinus > .orb {
+            width: 20px;
             background-color: orange;
-            /* animation: vinusRevolution 1s infinite linear; */
-            /* transform-origin: 0px calc(200px + 10px); */
-            left: 50%;
-            top: 0%;
-            /* animation: revolution 2s infinite linear; */
         }
 
         .earth {
-            width: 60px;
-            height: 60px;
+            width: 500px;
+        }
+
+        .earth > .orb {
+            width: 25px;
             background-color: blue;
-            left: 50%;
-            top: 0%;
         }
 
         .moon {
-            width: 20px;
-            height: 20px;
-            background-color: yellow;
-            left: 50%;
-            top: 0%;
+            width: 100px;
         }
 
-
-        /* @keyframes vinusRevolution {
-            0%{
-                transform: translate(-50%,calc(-50% - 200px)) rotate(0deg);
-            }
-            100%{
-                transform: translate(-50%,calc(-50% - 200px)) rotate(360deg);
-            }
-        } */
+        .moon > .orb {
+            width: 10px;
+            background-color: yellow;
+        }
 
         @keyframes revolution {
-            0%{
-                transform: translate(-50%,-50%) rotate(0deg);
+            0% {
+                transform: rotate(0deg) translate(-50%,-50%);
             }
-            100%{
-                transform: translate(-50%,-50%) rotate(360deg);
+            100% {
+                transform: rotate(360deg) translate(-50%,-50%);
             }
-        }
-
-        .수성궤도 {
-            width: 450px;
-            height: 450px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-            border: 1px solid white;
-            border-radius: 50%;
-            box-sizing: border-box;
-            animation: revolution infinite 3s linear;
-        }
-
-        .금성궤도 {
-            width: 600px;
-            height: 600px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-            border: 1px solid white;
-            border-radius: 50%;
-            box-sizing: border-box;
-            animation: revolution infinite 5s linear;
-        }
-
-        .지구궤도 {
-            width: 800px;
-            height: 800px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-            border: 1px solid white;
-            border-radius: 50%;
-            box-sizing: border-box;
-            animation: revolution infinite 10s linear;
-        }
-
-        .달궤도 {
-            width: 100px;
-            height: 100px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-            border: 1px solid white;
-            border-radius: 50%;
-            box-sizing: border-box;
-            animation: revolution infinite 5s linear;
         }
     </style>
 </head>
 <body>
-    <div class="sun orb">
-        <div class="수성궤도">
-            <div class="mercury orb"></div>
+    <div class="test" data-number="1" data-time="500"></div>
+
+    <div class="solar">
+        <div class="orb"></div>
+
+        <div class="mercury revolution" data-revolution="88">
+            <div class="orb"></div>
         </div>
-        <div class="금성궤도">
-            <div class="vinus orb"></div>
+
+        <div class="vinus revolution" data-revolution="288">
+            <div class="orb"></div>
         </div>
-        <div class="지구궤도">
-            <div class="earth orb">
-                <div class="달궤도">
-                    <div class="moon orb"></div>
-                </div>
+        
+        <div class="revolution earth" data-revolution="365">
+            <div class="orb"></div>
+            <div class="revolution moon" data-revolution="27">
+                <div class="orb"></div>
             </div>
         </div>
     </div>
-    
+
+    <script>
+
+        // <div class="test" data-number="1" data-time="500"></div>
+        // const test = document.querySelector('.test');
+        // console.log(Number(test.dataset.time));
+        const playRate = 5;
+        const revolutions = document.getElementsByClassName('revolution')
+
+        // for문을 이용해 레볼루션 컨텐츠들의 animationDuration을 설정 할 수있다.
+
+        // revolutions[i].style.animationDuration = `${어떠한값 여기는 연산 가능}s`
+
+        for(let i = 0 ; i < revolutions.length ; i++) {
+            revolutions[i].style.animationDuration = `${Number(revolutions[i].dataset.revolution)/playRate}s`
+        }
+        
+    </script>
 </body>
 </html>
