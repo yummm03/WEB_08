@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            height: 10000px;
+        }
+
+        .content{
+            width: 100px;
+            height: 100px;
+            margin-top: 1500px;
+            background-color: pink;
+            opacity: 0;
+            transform: translateX(200px);
+
+            transition: 0.3s;
+        }
+
+        .content.active{
+            opacity: 1;
+            transform: none;
+        }
+    </style>
 </head>
 <body>
     <!-- 
@@ -20,5 +41,31 @@
 
     여러개 있을때 처리하기
      -->
+    <div class="content-box"></div>
+
+     <script>
+        const contents = document.querySelector('.content-box');
+        const count = 7;
+
+        for(let i = 0 ; i < count ; i ++) {
+            const content = document.createElement('div');
+            content.classList.add('content');
+            contents.appendChild(content);
+        }
+        
+        window.addEventListener('scroll',(e)=>{
+            for(let i = 0 ; i < contents.childElementCount ; i ++) {
+
+                const pos = contents.children[i].getBoundingClientRect();
+                
+                if(pos.top <= window.innerHeight - pos.height){
+                    contents.children[i].classList.add('active');
+                    console.log('지금?')
+                }else {
+                    contents.children[i].classList.remove('active');
+                }
+            }    
+        })
+     </script>
 </body>
 </html>
