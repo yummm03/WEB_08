@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: 5000px;
+            background-image: url(img/main_visual_fullscreen.jpg);
+            background-repeat: no-repeat;
+        }
+        header {
+            position: fixed;
+            width: 100%;
+            height: 60px;
+            background-color: #ffffff80;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+        header.hide {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+        .logo {
+            padding: 36px;
+            width: 100px;
+            font-weight: bold;
+        }
+        .menu-icon {
+            width: 36px;
+            padding: 36px;
+            fill: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <object class="logo" data="img/logo-w.svg"></object>
+        <object class="menu-icon" data="img/ci--menu-duo-lg.svg"></object>
+    </header>
+
+    <script>
+        const header = document.querySelector(`header`)
+        let 이전값 = window.scrollY
+
+        window.addEventListener('scroll',()=>{
+            // console.log(window.scrollY);
+
+            if(window.scrollY > 이전값) {
+                header.classList.add(`hide`)
+            } else {
+                header.classList.remove(`hide`)
+            }
+
+            이전값 = window.scrollY;
+        })
+    </script>
+</body>
+</html>
