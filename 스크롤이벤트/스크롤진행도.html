@@ -25,22 +25,31 @@
             height: 10px;
             box-sizing: border-box;
 
-            background-color: red;
+            background-color: beige;
+        }
+        
+        .bar {
+            height: 100%;
+            background-color: cadetblue;
         }
     </style>
 </head>
 <body>
-    <div class="scroll-bar"></div>
+    <div class="scroll-bar">
+        <div class="bar"></div>
+    </div>
 
     <script>
-        const body = document.querySelector(`body`);
         const scrollBar = document.querySelector(`.scroll-bar`);
 
-    
-        let 스크롤 = scrollBar.clientWidth;
-
         window.addEventListener(`scroll`, () => {
-            
+            const 전제길이 = document.body.clientHeight;
+            const 현재스크롤 = window.screenY;
+
+            const 진행도 = 현재스크롤 / (전체길이 - window.innerHeight);
+            bar.style.width = `${진행도*100}%`
+        
+            let 스크롤 = scrollBar.clientWidth;
         })
     </script>
 </body>
