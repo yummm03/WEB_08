@@ -44,9 +44,14 @@
         window.addEventListener('scroll',()=>{
             const targetPos = target.getBoundingClientRect()
             // 바닥으로부터 target의 거리
-            const distance = (targetPos.height - (targetPos.height - window.innerHeight))*-1
+            const distance = targetPos.top * -1
             // distance 기준으로 최댓값(100%가 되는 지점)
-            const maxDistance = targetPos.height;
+            const maxDistance = targetPos.height - window.innerHeight;
+
+            // top값을 확인해주면서 조정해주면 편리함
+            console.log(targetPos.top);
+            
+            // 계산한 값을 0부터 1까지의 실수로 호출한다라는 의미
             const ratio = clamp(distance/maxDistance,0,1)
             progress.innerText = `${parseInt(ratio*100)}%`
 
